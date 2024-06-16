@@ -33,7 +33,7 @@ public class PostService {
         final String JDBC_URL = System.getenv("JDBC_URL");
         final String JDBC_USER = System.getenv("JDBC_USER");
         final String JDBC_PASSWORD = System.getenv("JDBC_PASSWORD");
-        
+
         Post savedPost = null;
         try {
             connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
@@ -50,7 +50,7 @@ public class PostService {
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             Integer uniqueKey = null;
             if (generatedKeys.next()) {
-                uniqueKey = generatedKeys.getInt(1); // Assuming 'id' is a Long type
+                uniqueKey = generatedKeys.getInt(1); 
             }
             savedPost = findById(uniqueKey);
 
