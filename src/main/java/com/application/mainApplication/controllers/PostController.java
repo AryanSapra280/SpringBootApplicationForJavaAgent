@@ -31,20 +31,16 @@ public class PostController {
     private PostService postService;
     private static ObjectMapper objectMapper = new ObjectMapper();
     RestTemplate restTemplate = new RestTemplate();
-    // @PostMapping("/createNewPost")
-    // public ResponseEntity<?> savePost(@RequestBody Post post) {
-    // //    return ResponseEntity.status(HttpStatus.OK).body(postService.testAgent());
-    //     Integer savedPostId = postService.savePost(post);
-    //     return ResponseEntity.status(HttpStatus.OK).body(String.format("Post created successfully with an id = %d ",savedPostId));
-    // }
+   
     @PostMapping("/createNewPost")
     public String savePost(@RequestBody String postString) {
         Post post;
+        final String http_url = System.getenv("HTTP_URL");
         try {
             post = objectMapper.readValue(postString, Post.class);
 
             // Get the response as a string
-            String httpOutboundString = restTemplate.getForEntity("https://mocki.io/v1/f5dee2f0-9931-4301-bd22-aa981b588254", String.class).getBody();
+            String httpOutboundString = restTemplate.getForEntity(http_url, String.class).getBody();
 
             // Directly deserialize the string to HttpOutBound class
             HttpOutBound httpOutBound = objectMapper.readValue(httpOutboundString, HttpOutBound.class);

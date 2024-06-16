@@ -30,9 +30,10 @@ public class PostService {
     //     return savedPost.getPostId();
     // }
     public Post savePost(Post post) {
-        String JDBC_URL = "jdbc:mysql://localhost:3306/postsRegistration";
-        String JDBC_USER = "root";
-        String JDBC_PASSWORD = "Admin@123";
+        final String JDBC_URL = System.getenv("JDBC_URL");
+        final String JDBC_USER = System.getenv("JDBC_USER");
+        final String JDBC_PASSWORD = System.getenv("JDBC_PASSWORD");
+        
         Post savedPost = null;
         try {
             connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
